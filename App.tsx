@@ -26,12 +26,14 @@ import {
 import { StyleSheet, Text, View, ImageBackground } from "react-native";
 import BackgroundImage from './src/components/common/backgroundImage';
 import { images } from './src/assets/images/images';
-import { createReduxStore } from "./src/redux/index";
+import rootReducer from './src/redux/index';
+import { createStore } from '@reduxjs/toolkit';
 import { Provider } from "react-redux";
+import MainNavigator from './src/navigation';
 
 export default function App() {
 
-  const store = createReduxStore();
+  const store = createStore(rootReducer);
 
   let [fontsLoaded] = useFonts({
     Poppins_100Thin,
@@ -60,9 +62,7 @@ export default function App() {
     return (
       <Provider store={store}>
         <NavigationContainer>
-          <BackgroundImage uri={images.onboarding}>
-            <View style={{ backgroundColor: '#000', width: 200, height: 200 }}></View>
-          </BackgroundImage>
+        <MainNavigator/>
         </NavigationContainer>
       </Provider>
     );
